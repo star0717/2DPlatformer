@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
         gameState = "playing"; //게임 중
     }
 
+    public int score = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -133,7 +135,18 @@ public class PlayerController : MonoBehaviour
         {
             GameOver();
         }
+        else if(collision.gameObject.tag == "ScoreItem")
+        {
+            // 점수아이템
+            // 아이템 데이터 가져오기
+            ItemData item = collision.gameObject.GetComponent<ItemData>();
+            // 점수 얻기
+            score = item.value;
+            // 아이템  제거
+            Destroy(collision.gameObject);
+        }
     }
+
     public void Goal()
     {
         animator.Play(goalAnime);
